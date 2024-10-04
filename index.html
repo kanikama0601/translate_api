@@ -1,16 +1,19 @@
+<!DOCTYPE html>
 <html lang = "ja">
   <head>
     <meta charset = "utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript</title>
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
 
   <body>
+    <form id="translate-form">
+      <textarea id="entext" placeholder="英語を入力してください" required></textarea>
+      <button type="submit">翻訳</button>
+    </form>
+    <br>
+    <textarea id="export_text"></textarea>
     <script src="script.js"></script>
-    <textarea id="entext" placeholder="英語を入力してください"></textarea>
-    <br>
-    <input type="button" value="翻  訳" onclick="output()">
-    <br>
-    <textarea id="jatext"></textarea>
   </body>
 </html>

@@ -1,4 +1,15 @@
 textarea {
-    width: 500px;
-    height:250px;
-  }
+  width: 500px;
+  height:250px;
+}
+
+#translate-form {
+  display: flex;
+  flex-direction: column;
+}
+
+#translate-form button {
+  margin-top: 10px;
+  width: 150px; /* ボタンの横幅を指定 */
+  height: 40px; /* ボタンの縦幅を指定 */
+}

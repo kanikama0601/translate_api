@@ -1,22 +1,34 @@
-const API_KEY = 'aeb1dc82-5ce4-4e31-bee0-3c5c7055ebd8:fx';
-const API_URL = 'https://api-free.deepl.com/v2/translate';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxVypWPBl9jhuW3a2kHd9VROfgNgF9icauTis3YZ5hoWcZxBdP9lLDVdqOLUv5OmvOoCQ/exec';
+// https://script.google.com/macros/s/AKfycbxVypWPBl9jhuW3a2kHd9VROfgNgF9icauTis3YZ5hoWcZxBdP9lLDVdqOLUv5OmvOoCQ/exec?text=この部分を翻訳します&source=ja&target=en
 
-function output() {
-  const entext = document.getElementById("entext").value;
+async function output() {
+    const entext = document.getElementById("entext").value;
+    const export_text = document.getElementById("export_text");
 
-  let content = encodeURI('auth_key=' + API_KEY + '&text=' + entext + '&source_lang=EN&target_lang=JA');
-  let url = API_URL + '?' + content;
+    let content = encodeURI('text=' + entext + '&source=ja&target=en');
+    console.log(`entext: ${entext}`);
+    console.log(`encoded content: ${content}`);
+    let url = GAS_URL + '?' + content;
+    export_text.innerText = 'loading...';
 
-  fetch(url)
-    .then(function(response) {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error("Could not reach the API: " + response.statusText);
+    try {
+        const response_google = await fetch(url);
+        if (!response_google.ok)
+        {
+            throw new Error(`HTTP error! status: ${response_gooogle.status}`);
         }
-    }).then(function(data) {
-        document.getElementById("jatext").value = data["translations"][0]["text"];
-    }).catch(function(error) {
-        document.getElementById("jatext").value = error.message;
-    });
+        const translated_google = await response_google.text();
+        export_text.innerText = translated_google;
+
+    }
+    catch (error) { //エラー処理
+        console.error('There was a problem with the fetch operation:', error.message);
+        export_text.innerText = 'error';
+        throw error;
+    }
 };
+
+document.getElementById('translate-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    output();
+});
