@@ -1,43 +1,16 @@
 <html lang = "ja">
-<head>
-<meta charset = "utf-8">
-<title>JavaScript</title>
-<style>
-  textarea {
-    width: 500px;
-    height:250px;
-  }
-</style>
-</head>
-<body>
-<script>
-const API_KEY = 'aeb1dc82-5ce4-4e31-bee0-3c5c7055ebd8:fx';
-const API_URL = 'https://api-free.deepl.com/v2/translate';
+  <head>
+    <meta charset = "utf-8">
+    <title>JavaScript</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
 
-function output() {
-  const entext = document.getElementById("entext").value;
-
-  let content = encodeURI('auth_key=' + API_KEY + '&text=' + entext + '&source_lang=EN&target_lang=JA');
-  let url = API_URL + '?' + content;
-
-  fetch(url)
-    .then(function(response) {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error("Could not reach the API: " + response.statusText);
-        }
-    }).then(function(data) {
-        document.getElementById("jatext").value = data["translations"][0]["text"];
-    }).catch(function(error) {
-        document.getElementById("jatext").value = error.message;
-    });
-};
-</script>
-<textarea id="entext" placeholder="英語を入力してください"></textarea>
-<br>
-<input type="button" value="翻  訳" onclick="output()" />
-<br>
-<textarea id="jatext"></textarea>
-</body>
+  <body>
+    <script src="script.js"></script>
+    <textarea id="entext" placeholder="英語を入力してください"></textarea>
+    <br>
+    <input type="button" value="翻  訳" onclick="output()">
+    <br>
+    <textarea id="jatext"></textarea>
+  </body>
 </html>
