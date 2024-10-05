@@ -8,14 +8,23 @@
   </head>
 
   <body>
-    <form id="translate-form">
-      <textarea id="input_text" placeholder="英語を入力してください" required></textarea>
-      <button type="submit">翻訳</button>
-    </form>
-    <br>
-    <textarea id="export_google"></textarea>
-    <textarea id="export_deepl"></textarea>
-
-    <script src="script.js"></script>
+      <div class="container">
+          <h1>翻訳ツール</h1>
+          <form id="translate-form">
+              <textarea id="input_text" placeholder="日本語を入力してください" required></textarea>
+              <button type="submit">翻訳</button>
+          </form>
+          <div class="output-container">
+              <div class="output-box">
+                  <h3>Google翻訳</h3>
+                  <textarea id="export_google" readonly></textarea>
+              </div>
+              <div class="output-box">
+                  <h3>DeepL翻訳</h3>
+                  <textarea id="export_deepl" readonly></textarea>
+              </div>
+          </div>
+      </div>
+      <script src="script.js"></script>
   </body>
 </html>
