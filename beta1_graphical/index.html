@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang = "ja">
+  <head>
+    <meta charset = "utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+
+  <body>
+      <div class="container">
+          <h1>翻訳ツール</h1>
+          <form id="translate-form">
+              <textarea id="input_text" placeholder="日本語を入力してください" required></textarea>
+              <button type="submit">翻訳</button>
+          </form>
+          <div class="output-container">
+              <div class="output-box">
+                  <h3>Google翻訳</h3>
+                  <textarea id="export_google" readonly></textarea>
+              </div>
+              <div class="output-box">
+                  <h3>DeepL翻訳</h3>
+                  <textarea id="export_deepl" readonly></textarea>
+              </div>
+          </div>
+      </div>
+      <script src="script.js"></script>
+  </body>
+</html>
