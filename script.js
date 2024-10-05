@@ -17,46 +17,43 @@ async function output() {
     let url_google = GAS_URL + '?' + content_google;
     let url_deepl = DEEP_URL + '?' + content_deepl;
     export_google.innerText = 'loading...';
+    export_deepl.innerText = 'loading...';
 
-    export_google.innerText = `${await getgoogletext(url_google)}`;
-    export_deepl.innerText = `${await getdeepltext(url_deepl)}`;
+    try {
+        const [googleText, deeplText] = await Promise.all([
+            getgoogletext(url_google),
+            getdeepltext(url_deepl)
+        ]);
+
+        export_google.innerText = googleText;
+        export_deepl.innerText = deeplText;
+    } catch (error) {
+        console.error('Error in translation:', error);
+        export_google.innerText = 'error';
+        export_deepl.innerText = 'error';
+    }
 };
 
 async function getgoogletext(url_google) {
-    try {
-        const response = await fetch(url_google);
-        if (!response.ok)
-        {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const translated_text = await response.text();
-        return translated_text;
+    const response = await fetch(url_google);
+    if (!response.ok)
+    {
+        throw new Error(`HTTP error! status: ${response.status}`);
     }
-    catch (error) { //エラー処理
-        console.error('There was a problem with the fetch operation:', error.message);
-        export_google.innerText = 'error';
-        throw error;
-    }
+    const translated_text = await response.text();
+    return translated_text;
 }
 
 async function getdeepltext(url_deepl) {
-    try {
-        const response = await fetch(url_deepl);
-        if (!response.ok)
-        {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log("data_deepl:",data);
-        const translated_text = data["translations"][0]["text"];
-        return translated_text;
-
+    const response = await fetch(url_deepl);
+    if (!response.ok)
+    {
+        throw new Error(`HTTP error! status: ${response.status}`);
     }
-    catch (error) { //エラー処理
-        console.error('There was a problem with the fetch operation:', error.message);
-        export_google.innerText = 'error';
-        throw error;
-    }
+    const data = await response.json();
+    console.log("data_deepl:",data);
+    const translated_text = data["translations"][0]["text"];
+    return translated_text;
 }
 
 document.getElementById('translate-form').addEventListener('submit', function(e) {
