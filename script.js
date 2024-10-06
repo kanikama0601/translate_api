@@ -155,9 +155,9 @@ function convertMarkdownToHTML(markdown) {
 }
 
 // メイン処理
-async function output() {
-    let content_google = encodeURI('text=' + input_text.value + '&source=ja&target=en');
-    let content_deepl = encodeURI('auth_key=' + DEEPL_API_KEY + '&text=' + input_text.value + '&source_lang=JA&target_lang=EN');
+async function output(source_lang, target_lang) {
+    let content_google = encodeURI('text=' + input_text.value + '&source=' + source_lang + '&target=' + target_lang);
+    let content_deepl = encodeURI('auth_key=' + DEEPL_API_KEY + '&text=' + input_text.value + '&source_lang=' + source_lang.toUpperCase() + '&target_lang=' + target_lang.toUpperCase());
     //urlで読み取れるようにエンコードした文字列を作成
     console.log(`input_text.value: ${input_text.value}`);
     console.log(`encoded google content: ${content_google}`);
@@ -192,7 +192,9 @@ async function output() {
 
 document.getElementById('translate-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    output();
+    const source_lang = document.getElementById("source_lang");
+    const target_lang = document.getElementById("target_lang");
+    output(source_lang.value, target_lang.value);
 });
 
 //This code was made by Kohara

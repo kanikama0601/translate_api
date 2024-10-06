@@ -45,6 +45,26 @@ button {
 button:hover {
   background-color: #2980b9;
 }
+/* プルダウンメニューのコンテナを横に並べる */
+.language-selection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+/* プルダウンメニューのスタイル */
+select {
+  width: 35%; /* 横幅を調整 */
+  padding: 15px; /* 縦を大きく */
+  font-size: 18px; /* フォントサイズも大きめに */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+/* ラベルとプルダウンの間の余白をなくす */
+.language-selection label {
+  margin-right: 10px;
+  font-size: 16px;
+}
 .output-container {
   display: flex;
   flex-direction: column;
