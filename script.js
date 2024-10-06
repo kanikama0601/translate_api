@@ -197,4 +197,8 @@ document.getElementById('translate-form').addEventListener('submit', function(e)
     output(source_lang.value, target_lang.value);
 });
 
-//This code was made by Kohara
+// This code was made by Kohara
+// 俺のAPI使ってるので、いずれ使えなるかもしれないです。
+// APIの利用が気になる場合はお尋ね下さい。
+// APIの変更時もお尋ね下さい。設定します。
+// kanikama0601school@gmail.com
