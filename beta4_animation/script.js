@@ -36,38 +36,6 @@ function addSlideInAnimation(element) {
     element.classList.add('slide-in-right'); // スライドインクラスを適用
 }
 
-// タイプライターアニメーションを実行する関数（HTML対応版）
-function typeWriter(element, html, speed = 50) {
-    element.innerHTML = ''; // まず空にする
-    let index = 0;
-    let isTag = false; // タグかどうかを判断するフラグ
-    let text = ''; // 実際に表示するテキスト
-
-    function type() {
-        if (index < html.length) {
-            let char = html.charAt(index);
-
-            if (char === '<') {
-                isTag = true; // タグの開始
-            }
-
-            if (isTag) {
-                text += char; // タグを一括で追加
-                if (char === '>') {
-                    isTag = false; // タグの終了
-                }
-            } else {
-                text += char; // 通常の文字を1つずつ追加
-            }
-
-            element.innerHTML = text; // HTMLとして表示
-            index++;
-            setTimeout(type, speed); // 次の文字までの待機時間
-        }
-    }
-    type();
-}
-
 async function getgeminiexplain(originalText, googletext, deepltext) {
     const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCLy7lbx4SNvUZrNWwSKVnDpXYa0Y-K4CE';
     const jsonfile = {
@@ -181,7 +149,7 @@ async function output() {
         addSlideInAnimation(export_deepl);
 
         const gemini_output = await getgeminiexplain(input_text.value, googleText, deeplText);
-        typeWriter(document.getElementById("export_gemini"), gemini_output, 1); //1ms間隔で文字を表示
+        export_gemini.innerHTML = gemini_output;
     } catch (error) {
         console.error('Error in translation:', error);
         export_google.innerText = 'error';

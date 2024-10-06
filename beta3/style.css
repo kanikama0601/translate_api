@@ -80,7 +80,7 @@ button:hover {
   margin-top: 20px;
 }
 #export_gemini ul {
-  padding-left: 10px;
+  padding-left: 20px;
 }
 #export_gemini li {
   margin-bottom: 10px;
@@ -89,23 +89,4 @@ button:hover {
   .translation-results {
       flex-direction: column;
   }
-}
-
-/* フェードインアニメーションのクラス */
-/* スライドイン＆フェードインアニメーションの定義 */
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px); /* 右から50pxスライド */
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0); /* 元の位置に戻る */
-  }
-}
-
-/* スライドイン＆フェードインアニメーションのクラス */
-.slide-in-right {
-  opacity: 0;
-  animation: slideInRight 0.5s forwards; /* 1.5秒でアニメーションを完了 */
 }

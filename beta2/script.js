@@ -5,7 +5,6 @@ const DEEPL_API_KEY = 'aeb1dc82-5ce4-4e31-bee0-3c5c7055ebd8:fx';
 const input_text = document.getElementById("input_text");
 const export_google = document.getElementById("export_google");
 const export_deepl = document.getElementById("export_deepl");
-const export_gemini = document.getElementById("export_gemini");
 
 async function getgoogletext(url_google) {
     const response = await fetch(url_google);
@@ -30,45 +29,7 @@ async function getdeepltext(url_deepl) {
     return translated_text;
 }
 
-function addSlideInAnimation(element) {
-    element.classList.remove('slide-in-right'); // 初期状態をリセット
-    void element.offsetWidth; // レイアウトの再計算を強制してアニメーションをリセット
-    element.classList.add('slide-in-right'); // スライドインクラスを適用
-}
-
-// タイプライターアニメーションを実行する関数（HTML対応版）
-function typeWriter(element, html, speed = 50) {
-    element.innerHTML = ''; // まず空にする
-    let index = 0;
-    let isTag = false; // タグかどうかを判断するフラグ
-    let text = ''; // 実際に表示するテキスト
-
-    function type() {
-        if (index < html.length) {
-            let char = html.charAt(index);
-
-            if (char === '<') {
-                isTag = true; // タグの開始
-            }
-
-            if (isTag) {
-                text += char; // タグを一括で追加
-                if (char === '>') {
-                    isTag = false; // タグの終了
-                }
-            } else {
-                text += char; // 通常の文字を1つずつ追加
-            }
-
-            element.innerHTML = text; // HTMLとして表示
-            index++;
-            setTimeout(type, speed); // 次の文字までの待機時間
-        }
-    }
-    type();
-}
-
-async function getgeminiexplain(originalText, googletext, deepltext) {
+async function getgeminiexplain(googletext, deepltext) {
     const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCLy7lbx4SNvUZrNWwSKVnDpXYa0Y-K4CE';
     const jsonfile = {
         contents: [
@@ -76,20 +37,17 @@ async function getgeminiexplain(originalText, googletext, deepltext) {
                 parts: [
                     {
                         text: `
-                        元の日本語テキスト: "${originalText}"
-                        Google翻訳: "${googletext}"
-                        DeepL翻訳: "${deepltext}"
+                        \"${googletext}\" , \"${deepltext}\" 
+                        Please output the differences between the two sentences above, labeling each as A and B, in the following order.
+                        1. Display the original sentence
+                        Please do not just label each as A and B, but output the original sentence as is. Do not change the language.
+                        2. Explain the nuance of each sentence
+                        Explain the nuance of each sentence.
+                        3. Conclusion
+                        Give a brief summary of the differences in nuance.
 
-                        以下の点について分析してください：
-                        1. 翻訳の正確性：両方の翻訳が原文の意味を正確に伝えているか評価してください。
-                        2. 文法と語彙：使用されている文法構造と語彙の適切さを比較してください。
-                        3. 自然さとフロー：どちらの翻訳がより自然で流暢に読めるか分析してください。
-                        4. ニュアンスの違い：二つの翻訳間でのニュアンスの違いを指摘してください。
-                        5. コンテキストの理解：翻訳が原文のコンテキストをどの程度適切に反映しているか評価してください。
-                        6. 改善点：両方の翻訳について、改善できる点があれば提案してください。
-                        7. 総合評価：両方の翻訳の長所と短所を総合的にまとめ、どちらがより効果的か結論を出してください。
-
-                        分析は日本語で行い、各ポイントを明確に分けて説明してください
+                        Output in this order.
+                        However, please output in Japanese.
                         `
                     }
                 ]
@@ -131,7 +89,6 @@ function convertMarkdownToHTML(markdown) {
     //(?!.*<\/li><li>)とすることにより、後に*</li><li>が無い、</li><li>を指定する
     // Convert **text** to <b>text</b>
     let html = markdown.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-    html = html.replace(/### (.*?)\\n/g, '<h3>$1</h3><br>');
     // Convert ## Heading to <h2>Heading</h2>
     html = html.replace(/## (.*?)\\n/g, '<h2>$1</h2><br>');
 
@@ -177,11 +134,8 @@ async function output() {
         export_google.innerText = googleText;
         export_deepl.innerText = deeplText;
 
-        addSlideInAnimation(export_google);
-        addSlideInAnimation(export_deepl);
-
-        const gemini_output = await getgeminiexplain(input_text.value, googleText, deeplText);
-        typeWriter(document.getElementById("export_gemini"), gemini_output, 1); //1ms間隔で文字を表示
+        const gemini_output = await getgeminiexplain(googleText, deeplText);
+        export_gemini.innerHTML = gemini_output;
     } catch (error) {
         console.error('Error in translation:', error);
         export_google.innerText = 'error';

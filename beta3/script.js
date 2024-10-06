@@ -5,7 +5,6 @@ const DEEPL_API_KEY = 'aeb1dc82-5ce4-4e31-bee0-3c5c7055ebd8:fx';
 const input_text = document.getElementById("input_text");
 const export_google = document.getElementById("export_google");
 const export_deepl = document.getElementById("export_deepl");
-const export_gemini = document.getElementById("export_gemini");
 
 async function getgoogletext(url_google) {
     const response = await fetch(url_google);
@@ -28,44 +27,6 @@ async function getdeepltext(url_deepl) {
     console.log("data_deepl:",data);
     const translated_text = data["translations"][0]["text"];
     return translated_text;
-}
-
-function addSlideInAnimation(element) {
-    element.classList.remove('slide-in-right'); // 初期状態をリセット
-    void element.offsetWidth; // レイアウトの再計算を強制してアニメーションをリセット
-    element.classList.add('slide-in-right'); // スライドインクラスを適用
-}
-
-// タイプライターアニメーションを実行する関数（HTML対応版）
-function typeWriter(element, html, speed = 50) {
-    element.innerHTML = ''; // まず空にする
-    let index = 0;
-    let isTag = false; // タグかどうかを判断するフラグ
-    let text = ''; // 実際に表示するテキスト
-
-    function type() {
-        if (index < html.length) {
-            let char = html.charAt(index);
-
-            if (char === '<') {
-                isTag = true; // タグの開始
-            }
-
-            if (isTag) {
-                text += char; // タグを一括で追加
-                if (char === '>') {
-                    isTag = false; // タグの終了
-                }
-            } else {
-                text += char; // 通常の文字を1つずつ追加
-            }
-
-            element.innerHTML = text; // HTMLとして表示
-            index++;
-            setTimeout(type, speed); // 次の文字までの待機時間
-        }
-    }
-    type();
 }
 
 async function getgeminiexplain(originalText, googletext, deepltext) {
@@ -177,11 +138,8 @@ async function output() {
         export_google.innerText = googleText;
         export_deepl.innerText = deeplText;
 
-        addSlideInAnimation(export_google);
-        addSlideInAnimation(export_deepl);
-
         const gemini_output = await getgeminiexplain(input_text.value, googleText, deeplText);
-        typeWriter(document.getElementById("export_gemini"), gemini_output, 1); //1ms間隔で文字を表示
+        export_gemini.innerHTML = gemini_output;
     } catch (error) {
         console.error('Error in translation:', error);
         export_google.innerText = 'error';
