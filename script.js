@@ -69,7 +69,7 @@ function typeWriter(element, html, speed = 50) {
 }
 
 async function getgeminiexplain(originalText, googletext, deepltext) {
-    const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCLy7lbx4SNvUZrNWwSKVnDpXYa0Y-K4CE';
+    const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyB6W3uG-JYHI2SzCmMl48MeIu6VvHjxRc8';
     const jsonfile = {
         contents: [
             {
