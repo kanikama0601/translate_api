@@ -1,71 +1,25 @@
 <!DOCTYPE html>
-<html lang = "ja">
-  <head>
-    <meta charset = "utf-8">
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI翻訳分析ツール</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-  </head>
+</head>
 
-  <body>
-    <p>firefoxの利用を想定しています。(動作確認 Firefox 131.0 64bit)</p>
-    <div class="container">
-        <h1>AI翻訳分析ツール</h1>
-        <form id="translate-form">
-            <textarea id="input_text" placeholder="翻訳したい日本語テキストを入力してください"></textarea>
-            <div class="language-selection">
-                <!-- 変換元の言語選択 -->
-                <label for="source_lang">変換元:</label>
-                <select id="source_lang">
-                    <option value="ja">日本語</option>
-                    <option value="en">英語</option>
-                    <option value="zh">中国語</option>
-                    <option value="ko">韓国語</option>
-                    <option value="fr">フランス語</option>
-                    <option value="de">ドイツ語</option>
-                    <option value="ru">ロシア語</option>
-                    <option value="ar">アラビア語</option>
-                    <option value="sw">スワヒリ語</option>
-                </select>
-        
-                <!-- 変換先の言語選択 -->
-                <label for="target_lang">変換先:</label>
-                <select id="target_lang">
-                    <option value="en">英語</option>
-                    <option value="ja">日本語</option>
-                    <option value="zh">中国語</option>
-                    <option value="ko">韓国語</option>
-                    <option value="fr">フランス語</option>
-                    <option value="de">ドイツ語</option>
-                    <option value="ru">ロシア語</option>
-                    <option value="ar">アラビア語</option>
-                    <option value="sw">スワヒリ語</option>
-                </select>
-            </div>
-            <br>
-            <br>
-            <br>
-            <button type="submit">翻訳・分析開始</button>
-            <br>
-            <br>
-            <br>
-        </form>
-        <div class="output-container">
-            <div class="translation-results">
-                <div class="output-box">
-                    <h3>Google翻訳</h3>
-                    <div id="export_google"></div>
-                </div>
-                <div class="output-box">
-                    <h3>DeepL翻訳</h3>
-                    <div id="export_deepl"></div>
-                </div>
-            </div>
-            <div id="export_gemini">
-                <h3>AIによる分析結果</h3>
-            </div>
+<body>
+    <h1>サイトを移動しました</h1>
+    <div class="message-box">
+        <p>
+            以前のコードではフロントエンドにAPIキーを入れており、<br>
+            Google Cloudから1度BANを喰らいました。<br>
+            そのためバックエンドでAPIを処理するよう、netlify functionsに移行しました。<br>
+            移行後のサイトは、下リンクよりアクセスしてください。<br>
+            いつもご利用ありがとうございます。
+        </p>
+        <div class="link-container">
+            <a href="https://kanikama0601-translateapi.netlify.app/">新しいサイトへ移動</a>
         </div>
     </div>
-    <script src="script.js"></script>
-  </body>
+</body>
 </html>

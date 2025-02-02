@@ -1,6 +1,6 @@
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbxVypWPBl9jhuW3a2kHd9VROfgNgF9icauTis3YZ5hoWcZxBdP9lLDVdqOLUv5OmvOoCQ/exec';
-const DEEP_URL = 'https://api-free.deepl.com/v2/translate';
-const DEEPL_API_KEY = 'aeb1dc82-5ce4-4e31-bee0-3c5c7055ebd8:fx';
+const GAS_URL = 'DUMMY_URL';
+const DEEP_URL = 'DUMMY_URL';
+const DEEPL_API_KEY = 'DUMMY_API_KEY';
 
 const input_text = document.getElementById("input_text");
 const export_google = document.getElementById("export_google");
@@ -69,7 +69,7 @@ function typeWriter(element, html, speed = 50) {
 }
 
 async function getgeminiexplain(originalText, googletext, deepltext) {
-    const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyB6W3uG-JYHI2SzCmMl48MeIu6VvHjxRc8';
+    const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=DUMMY_API_KEY';
     const jsonfile = {
         contents: [
             {
